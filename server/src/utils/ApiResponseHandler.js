@@ -1,6 +1,6 @@
-function ApiResponseHandler(message, code, data) {
+function ApiResponseHandler(message, code, data, success = false) {
 	const responseObj = {
-		success: true,
+		success,
 		status: code,
 		response: data || '',
 		message: message,

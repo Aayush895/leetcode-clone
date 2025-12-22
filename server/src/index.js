@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
 import v0Routes from './routes/v0/index.js';
 import ErrorHandler from './middlewares/ErrorHandler.js';
-import { SERVER_PORT } from './config/server.config.js';
+import { SERVER_PORT, DB_URI, DB_NAME } from './config/server.config.js';
 import logger from '../logger.js';
 
 const app = express();
@@ -26,6 +27,9 @@ app.use(
 	})
 );
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(
 	cors({
 		methods: ['GET', 'PUT', 'DELETE', 'POST'],
@@ -44,6 +48,23 @@ app.use('/api', v0Routes);
 // Custom Error Handler Middleware
 app.use(ErrorHandler);
 
-app.listen(SERVER_PORT, () => {
-	console.log(`Server is running on port ${SERVER_PORT}`);
-});
+async function startServer() {
+	try {
+		const mongodbconnectionInstance = await mongoose.connect(
+			`${DB_URI}/${DB_NAME}`
+		);
+
+		console.log(
+			`MongoDB connected! DB Host: ${mongodbconnectionInstance.connection.host}`
+		);
+
+		app.listen(SERVER_PORT, () => {
+			console.log(`Server is running on port ${SERVER_PORT}`);
+		});
+	} catch (error) {
+		console.error('Failed to start server:', error);
+		process.exit(1);
+	}
+}
+
+startServer();
