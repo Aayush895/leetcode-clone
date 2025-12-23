@@ -1,5 +1,8 @@
 import bcrypt from 'bcrypt';
-import { registerUserRepo } from '../respository/auth.repo.js';
+import {
+	registerUserRepo,
+	findUserByCredentialsRepo
+} from '../respository/auth.repo.js';
 
 export async function registerUserService({
 	username,
@@ -26,5 +29,24 @@ export async function registerUserService({
 	} catch (error) {
 		console.log(error);
 		throw new Error('Error in registering the user');
+	}
+}
+
+export async function loginUserService(username, email, password) {
+	try {
+		const user = await findUserByCredentialsRepo(username, email);
+		if (!user) {
+			throw new Error('User by the provided credentials does not exist');
+		}
+
+		const isPasswordValid = await bcrypt.compare(password, user?.password);
+
+		if (!isPasswordValid) {
+			throw new Error('Password is invalid');
+		}
+
+		return user;
+	} catch (error) {
+		throw new Error('Error in logging the user');
 	}
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 import v0Routes from './routes/v0/index.js';
 import ErrorHandler from './middlewares/ErrorHandler.js';
 import { SERVER_PORT, DB_URI, DB_NAME } from './config/server.config.js';
@@ -29,7 +30,7 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(
 	cors({
 		methods: ['GET', 'PUT', 'DELETE', 'POST'],
