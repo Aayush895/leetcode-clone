@@ -1,6 +1,11 @@
+import Login from './Components/Auth/Login'
+import Register from './Components/Auth/Register'
+
 function App() {
   return (
-    <div>App</div>
+    <>
+      <Register />
+    </>
   )
 }
 export default App
