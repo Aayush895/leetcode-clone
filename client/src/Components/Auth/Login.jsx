@@ -1,3 +1,5 @@
+import { Link } from 'react-router'
+
 function Login() {
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-[radial-gradient(closest-side_at_50%_135%,#ffffff_50%,#eceff1_100%)]">
@@ -23,6 +25,13 @@ function Login() {
         <button className="w-[85%] p-2 mb-9 bg-gray-800 text-white rounded-sm">
           Login
         </button>
+
+        <p className="text-gray-300">
+          Dont' have an account?{' '}
+          <span className="text-gray-700 cursor-pointer">
+            <Link to="/">Register Here</Link>
+          </span>
+        </p>
       </form>
     </div>
   )

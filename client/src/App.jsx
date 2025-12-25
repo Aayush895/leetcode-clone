@@ -1,10 +1,9 @@
-import Login from './Components/Auth/Login'
-import Register from './Components/Auth/Register'
+import Router from './Router'
 
 function App() {
   return (
     <>
-      <Register />
+      <Router />
     </>
   )
 }
