@@ -9,3 +9,13 @@ export async function registerUser(userDetails) {
     throw error
   }
 }
+
+export async function loginUser(userDetails) {
+  try {
+    const responseData = await axiosInstance.post('/login', userDetails)
+    return responseData?.data
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
