@@ -1,6 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
 
 function Login() {
+  const [userLoginDetails, setuserLoginDetails] = useState({
+    username: '',
+    email: '',
+    password: '',
+  })
+
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-[radial-gradient(closest-side_at_50%_135%,#ffffff_50%,#eceff1_100%)]">
       <form
@@ -13,13 +20,28 @@ function Login() {
         />
 
         <div className="border border-gray-300 w-[85%] p-2 mb-9 text-gray-600">
-          <input type="text" placeholder="Username" className="w-full" />
+          <input
+            type="text"
+            placeholder="Username"
+            className="w-full"
+            value={userLoginDetails?.username}
+          />
         </div>
         <div className="border border-gray-300 w-[85%] p-2 mb-9 text-gray-600">
-          <input type="email" placeholder="E-mail address" className="w-full" />
+          <input
+            type="email"
+            placeholder="E-mail address"
+            className="w-full"
+            value={userLoginDetails?.email}
+          />
         </div>
         <div className="border border-gray-300 w-[85%] p-2 mb-9 text-gray-600">
-          <input type="password" placeholder="Password" className="w-full" />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full"
+            value={userLoginDetails?.password}
+          />
         </div>
 
         <button className="w-[85%] p-2 mb-9 bg-gray-800 text-white rounded-sm">
