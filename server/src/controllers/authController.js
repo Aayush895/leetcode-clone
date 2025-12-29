@@ -43,7 +43,7 @@ export async function loginUser(req, res, next) {
 		res.cookie('token', token, {
 			httpOnly: true,
 			sameSite: 'Strict',
-			maxAge: 3600000
+			maxAge: 15 * 60 * 1000 // 15 min expiry
 		});
 
 		return res.send(
@@ -54,6 +54,26 @@ export async function loginUser(req, res, next) {
 				true
 			)
 		);
+	} catch (error) {
+		next(error);
+	}
+}
+
+export async function verifyCookie(req, res, next) {
+	try {
+		const incomingToken = req?.user;
+		if (!incomingToken) {
+			return res.send(
+				ApiResponseHandler(
+					'Incoming token is not valid',
+					401,
+					'',
+					false
+				)
+			);
+		}
+
+		return res.send(ApiResponseHandler('Valid cookie', 200, '', true));
 	} catch (error) {
 		next(error);
 	}
