@@ -3,14 +3,14 @@ import { JWT_SECRET } from '../config/authToken.config.js';
 import ApiResponseHandler from '../utils/ApiResponseHandler.js';
 
 export function verifyIncomingAuthToken(req, res, next) {
-	const token = req.headers.authorization?.split(' ')[1];
+	const token = req.headers.authorization?.split(' ')[1] || req.cookies?.token;
 	if (!token) {
-		return ApiResponseHandler(
+		return res.send(ApiResponseHandler(
 			'Access token required',
 			401,
 			undefined,
 			false
-		);
+		));
 	}
 
 	try {

@@ -19,3 +19,16 @@ export async function loginUser(userDetails) {
     throw error
   }
 }
+
+export async function verifyCookie() {
+  try {
+    const responseData = await axiosInstance.get('/verify-cookie', {
+      withCredentials: true,
+    })
+    console.log('LOGGING DATA: ', responseData?.data)
+    return responseData?.data
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}

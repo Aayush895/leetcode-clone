@@ -29,6 +29,15 @@ const useAuthStore = create((set) => {
         }
       })
     },
+    isAdmin: false,
+    setisAdmin: (adminStatus) => {
+      set((state) => {
+        return {
+          ...state,
+          isAdmin: adminStatus,
+        }
+      })
+    },
   }
 })
 

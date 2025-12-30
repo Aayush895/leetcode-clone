@@ -73,7 +73,14 @@ export async function verifyCookie(req, res, next) {
 			);
 		}
 
-		return res.send(ApiResponseHandler('Valid cookie', 200, '', true));
+		return res.send(
+			ApiResponseHandler(
+				'Valid cookie',
+				200,
+				{ isCookieValid: true },
+				true
+			)
+		);
 	} catch (error) {
 		next(error);
 	}
