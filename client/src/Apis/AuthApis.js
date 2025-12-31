@@ -12,7 +12,9 @@ export async function registerUser(userDetails) {
 
 export async function loginUser(userDetails) {
   try {
-    const responseData = await axiosInstance.post('/login', userDetails)
+    const responseData = await axiosInstance.post('/login', userDetails, {
+      withCredentials: true,
+    })
     return responseData?.data
   } catch (error) {
     console.log(error)

@@ -25,6 +25,8 @@ function PrivateRoutes() {
 
     if (data?.response?.isCookieValid && isAdmin) {
       navigate('/admin', { replace: true })
+    } else {
+      navigate('/home')
     }
   }, [data, isAdmin, navigate])
 
@@ -32,5 +34,5 @@ function PrivateRoutes() {
 }
 export default PrivateRoutes
 
-// samesite & secure in cookie
-// enable attribute and refetch attribute in tanstack query
+// samesite & secure in cookie --> Research
+// enable attribute and refetch attribute in tanstack query --> Research
