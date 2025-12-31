@@ -4,7 +4,6 @@ import Login from './Components/Auth/Login'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import Home from './Components/Home/Home'
 import PrivateRoutes from './PrivateRoutes'
-import AdminRoutes from './AdminRoutes'
 
 function Router() {
   return (
@@ -12,9 +11,7 @@ function Router() {
       <Route path="/" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route element={<PrivateRoutes />}>
-        <Route element={<AdminRoutes allowedRole={'Admin'} />}>
-          <Route path="/admin" element={<AdminDashboard />} />
-        </Route>
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/home" element={<Home />} />
       </Route>
     </Routes>

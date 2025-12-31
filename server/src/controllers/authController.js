@@ -42,7 +42,8 @@ export async function loginUser(req, res, next) {
 
 		res.cookie('token', token, {
 			httpOnly: true,
-			sameSite: 'Strict',
+			sameSite: 'Lax',
+			secure: false,
 			maxAge: 15 * 60 * 1000 // 15 min expiry
 		});
 
