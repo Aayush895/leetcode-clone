@@ -1,7 +1,8 @@
 import ApiResponseHandler from '../utils/ApiResponseHandler.js';
 import {
 	registerUserService,
-	loginUserService
+	loginUserService,
+	fetchUserInfoBasedOnTokenInfoService
 } from '../services/auth.service.js';
 import { generateToken } from '../utils/generateWebToken.js';
 
@@ -44,7 +45,7 @@ export async function loginUser(req, res, next) {
 			httpOnly: true,
 			sameSite: 'Lax',
 			secure: false,
-			maxAge: 15 * 60 * 1000 // 15 min expiry
+			maxAge: 60 * 60 * 1000 // 15 min expiry
 		});
 
 		return res.send(
@@ -62,8 +63,8 @@ export async function loginUser(req, res, next) {
 
 export async function verifyCookie(req, res, next) {
 	try {
-		const incomingToken = req?.user;
-		if (!incomingToken) {
+		const incomingUserInfo = req?.user;
+		if (!incomingUserInfo.userDetails) {
 			return res.send(
 				ApiResponseHandler(
 					'Incoming token is not valid',
@@ -74,11 +75,20 @@ export async function verifyCookie(req, res, next) {
 			);
 		}
 
+		const fetchUserInfoBasedOnTokenInfo =
+			await fetchUserInfoBasedOnTokenInfoService(
+				incomingUserInfo.userDetails.username,
+				incomingUserInfo.userDetails.email
+			);
+
 		return res.send(
 			ApiResponseHandler(
 				'Valid cookie',
 				200,
-				{ isCookieValid: true },
+				{
+					isCookieValid: true,
+					userInfo: fetchUserInfoBasedOnTokenInfo
+				},
 				true
 			)
 		);

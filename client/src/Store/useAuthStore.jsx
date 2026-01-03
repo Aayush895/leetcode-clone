@@ -10,34 +10,7 @@ const useAuthStore = create((set) => {
           userInfo: { ...userDetails },
         }
       })
-    },
-    isUserRegistered: false,
-    setisUserRegistered: (userRegisterationStatus) => {
-      set((state) => {
-        return {
-          ...state,
-          isUserRegistered: userRegisterationStatus,
-        }
-      })
-    },
-    isUserLoggedIn: false,
-    setisUserLoggedIn: (userLoginStatus) => {
-      set((state) => {
-        return {
-          ...state,
-          isUserLoggedIn: userLoginStatus,
-        }
-      })
-    },
-    isAdmin: false,
-    setisAdmin: (adminStatus) => {
-      set((state) => {
-        return {
-          ...state,
-          isAdmin: adminStatus,
-        }
-      })
-    },
+    }
   }
 })
 

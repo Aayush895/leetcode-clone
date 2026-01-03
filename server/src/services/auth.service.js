@@ -50,3 +50,16 @@ export async function loginUserService(username, email, password) {
 		throw new Error('Error in logging the user');
 	}
 }
+
+export async function fetchUserInfoBasedOnTokenInfoService(username, email) {
+	try {
+		if (!username || !email) {
+			throw new Error('Incoming user information was not received');
+		}
+
+		const fetchUserInfo = await findUserByCredentialsRepo(username, email);
+		return fetchUserInfo;
+	} catch (error) {
+		throw new Error('Incoming token was invalid or not decoded properly');
+	}
+}

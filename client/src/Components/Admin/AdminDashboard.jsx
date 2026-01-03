@@ -1,6 +1,10 @@
+import Nav from "../Navbar/Nav"
+
 function AdminDashboard() {
   return (
-    <div>AdminDashboard</div>
+    <>
+      <Nav />
+    </>
   )
 }
 export default AdminDashboard

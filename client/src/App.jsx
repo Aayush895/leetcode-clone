@@ -1,11 +1,12 @@
-import PrivateRoutes from './PrivateRoutes'
+import {PrimeReactProvider} from 'primereact/api'
 import Router from './Router'
 
 function App() {
   return (
     <>
-      <Router />
-      <PrivateRoutes />
+      <PrimeReactProvider>
+        <Router />
+      </PrimeReactProvider>
     </>
   )
 }
