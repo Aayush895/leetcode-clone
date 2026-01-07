@@ -3,14 +3,14 @@ import Register from './Components/Auth/Register'
 import Login from './Components/Auth/Login'
 import AdminDashboard from './Components/Admin/AdminDashboard'
 import Home from './Components/Home/Home'
-import PrivateRoutes from './PrivateRoutes'
+import ProtectedRoutes from './ProtectedRoutes'
 
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route element={<PrivateRoutes />}>
+      <Route element={<ProtectedRoutes allowedRoles={['Admin', 'User']} />}>
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/home" element={<Home />} />
       </Route>
