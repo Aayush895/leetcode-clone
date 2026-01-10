@@ -27,7 +27,6 @@ export async function verifyCookie() {
     const responseData = await axiosInstance.get('/verify-cookie', {
       withCredentials: true,
     })
-    console.log('LOGGING DATA: ', responseData?.data)
     return responseData?.data
   } catch (error) {
     console.log(error)
